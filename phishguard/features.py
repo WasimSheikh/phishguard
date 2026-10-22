@@ -27,22 +27,28 @@ NAMES = (
     "n_special",
     "n_subdomains",
     "ip_in_host",
-    "https",
     "n_suspicious",
 )
 
 
-def _host(url):
+def _parse(url):
     raw = url.strip()
     if "://" not in raw:
         raw = "http://" + raw
     return urlparse(raw)
 
 
+def _without_scheme(url):
+    raw = url.strip()
+    if "://" in raw:
+        return raw.split("://", 1)[1]
+    return raw
+
+
 def extract(url):
-    parsed = _host(url)
+    parsed = _parse(url)
+    text = _without_scheme(url)
     host = (parsed.hostname or "").lower()
-    text = url.strip()
     parts = [p for p in host.split(".") if p]
     n_sub = max(len(parts) - 2, 0)
     ip = 1.0 if host and (_IPV4.match(host) or (":" in host and _IPV6.match(host))) else 0.0
@@ -52,7 +58,6 @@ def extract(url):
         "n_special": float(len(_SPECIAL.findall(text))),
         "n_subdomains": float(n_sub),
         "ip_in_host": ip,
-        "https": 1.0 if parsed.scheme == "https" else 0.0,
         "n_suspicious": float(sum(w in text.lower() for w in SUSPICIOUS)),
     }
 

@@ -24,5 +24,6 @@ def test_score_url_with_tiny_model(tmp_path):
     proba, thr, top, feats = score_url("https://secure-login.example.com/verify", bundle)
     assert 0.0 <= proba <= 1.0
     assert thr == 0.5
-    assert feats["https"] == 1.0
+    assert "https" not in feats
+    assert feats["n_suspicious"] >= 1
     assert len(top) == 5

@@ -1,6 +1,6 @@
 # PhishGuard
 
-A small phishing URL detector I built to practice logistic regression. It only looks at the text of the URL: length, digit count, special characters, subdomains, whether the host is an IP, https vs http, and a short list of suspicious words.
+A small phishing URL detector I built to practice logistic regression. It only looks at the text of the URL: length, digit count, special characters, subdomains, whether the host is an IP, and a short list of suspicious words. The scheme is stripped first so length and punctuation cannot still encode http vs https.
 
 Two models get those same features. One is logistic regression written from scratch in NumPy (sigmoid, cross-entropy, gradient descent, L2). The other is sklearn's `LogisticRegression`. The decision threshold is picked on a validation set by F1, then everything is scored on a held-out test set.
 
@@ -24,12 +24,14 @@ pytest -q
 
 80,000 URLs drawn from PhiUSIIL (seed 7), stratified 70/15/15. Positive class is phishing. Numbers below are on the 12,000-row test set.
 
+I dropped the https/scheme flag because in this dataset every HTTP URL is phishing and every legitimate URL is HTTPS.
+
 | model | threshold | precision | recall | F1 | ROC-AUC |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| NumPy LR | 0.25 | 0.955 | 0.970 | 0.962 | 0.993 |
-| sklearn LR | 0.40 | 0.969 | 0.959 | 0.964 | 0.994 |
+| NumPy LR | 0.35 | 0.854 | 0.714 | 0.777 | 0.842 |
+| sklearn LR | 0.25 | 0.838 | 0.741 | 0.787 | 0.844 |
 
-The two fits land in the same place. Sklearn's solver is a bit better calibrated, so its threshold sits closer to 0.5. The NumPy run needs a lower cut to get the same F1.
+The two fits stay close once they share the same scheme-free features.
 
 ![ROC curves](charts/roc.png)
 
@@ -43,6 +45,6 @@ The raw file is about 50MB and is not checked in. `python -m phishguard train` (
 
 ## Limitations
 
-Lexical features only. No HTML, no DNS, no hosting or reputation signals. In this dataset every HTTP URL is phishing and every legitimate URL is HTTPS, and digit counts are also very skewed, so the numbers above look stronger than they would on the live web. Do not use this as a real phishing filter.
+Lexical features only. No HTML, no DNS, no hosting or reputation signals. Digit counts are still very skewed toward phishing in this data, so the numbers above look stronger than they would on the live web. Do not use this as a real phishing filter.
 
 Built after my DeepLearning.AI / Stanford Online course [Supervised Machine Learning: Regression and Classification](https://www.coursera.org/account/accomplishments/verify/VW0IAEFG1VKB).
