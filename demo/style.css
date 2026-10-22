@@ -1,0 +1,19 @@
+body {
+  font-family: system-ui, sans-serif;
+  max-width: 720px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  color: #222;
+  line-height: 1.5;
+}
+form { display: flex; gap: 0.5rem; }
+input { flex: 1; padding: 0.5rem; font-size: 1rem; }
+button { padding: 0.5rem 0.9rem; font-size: 0.95rem; cursor: pointer; }
+#examples { display: flex; flex-direction: column; align-items: flex-start; gap: 0.3rem; margin: 0.5rem 0 1.5rem; }
+#examples button { background: none; border: none; padding: 0; color: #0645ad; font-family: monospace; text-align: left; word-break: break-all; }
+.big { font-size: 1.6rem; font-weight: 600; }
+.bad { color: #b00020; font-weight: 600; }
+.good { color: #1b7f3b; font-weight: 600; }
+table { border-collapse: collapse; margin-top: 0.5rem; }
+td { padding: 0.2rem 1rem 0.2rem 0; font-family: monospace; }
+.note { font-size: 0.9rem; color: #555; border-top: 1px solid #ddd; margin-top: 2rem; padding-top: 1rem; }
