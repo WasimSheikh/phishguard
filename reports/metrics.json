@@ -1,0 +1,50 @@
+{
+  "dataset": "PhiUSIIL Phishing URL Dataset (UCI / Mendeley)",
+  "license": "CC BY 4.0",
+  "sample": 80000,
+  "split": "70/15/15 stratified",
+  "numpy": {
+    "threshold": 0.35,
+    "precision": 0.8539430704619692,
+    "recall": 0.7135893936439852,
+    "f1": 0.7774827403080191,
+    "roc_auc": 0.8421640465113731,
+    "confusion": [
+      [
+        6245,
+        626
+      ],
+      [
+        1469,
+        3660
+      ]
+    ],
+    "n": 12000
+  },
+  "sklearn": {
+    "threshold": 0.25,
+    "precision": 0.8380343763772587,
+    "recall": 0.7414700721388184,
+    "f1": 0.7868004551567187,
+    "roc_auc": 0.8441874077557564,
+    "confusion": [
+      [
+        6136,
+        735
+      ],
+      [
+        1326,
+        3803
+      ]
+    ],
+    "n": 12000
+  },
+  "features": [
+    "url_length",
+    "n_digits",
+    "n_special",
+    "n_subdomains",
+    "ip_in_host",
+    "n_suspicious"
+  ]
+}
