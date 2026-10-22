@@ -50,4 +50,4 @@ def best_threshold(y, proba, grid=None):
         f1 = 2 * prec * rec / (prec + rec) if prec + rec else 0.0
         if f1 > best_f1:
             best_t, best_f1 = float(t), float(f1)
-    return best_t, best_f1
+    return round(best_t, 2), best_f1

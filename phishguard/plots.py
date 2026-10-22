@@ -49,6 +49,7 @@ def learning_curve_chart(sizes, train_f1, val_f1, path):
     ax.plot(sizes, val_f1, label="held-out F1")
     ax.set_xlabel("Training rows")
     ax.set_ylabel("F1")
+    ax.set_ylim(0.7, 1.0)
     ax.set_title("Learning curve (NumPy model)")
     ax.legend()
     return _save(fig, path)

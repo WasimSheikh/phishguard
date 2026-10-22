@@ -1,14 +1,12 @@
 import json
 from pathlib import Path
 
-import numpy as np
 from sklearn.metrics import (
     confusion_matrix,
     f1_score,
     precision_score,
     recall_score,
     roc_auc_score,
-    roc_curve,
 )
 
 
@@ -27,8 +25,7 @@ def scores(y, proba, threshold):
 
 def learning_curve_points(X, y, sizes, fit_fn, proba_fn):
     xs, train_f1, val_f1 = [], [], []
-    n = len(y)
-    cut = int(n * 0.8)
+    cut = int(len(y) * 0.8)
     X_tr, X_va = X[:cut], X[cut:]
     y_tr, y_va = y[:cut], y[cut:]
     for frac in sizes:
@@ -47,8 +44,3 @@ def dump(path, payload):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2))
     return path
-
-
-def roc_points(y, proba):
-    fpr, tpr, _ = roc_curve(y, proba)
-    return fpr.tolist(), tpr.tolist()
