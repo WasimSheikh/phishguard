@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PhishGuard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>PhishGuard</h1>
+  <p>Scores a URL with a small logistic regression trained on lexical features (length, digits, punctuation, subdomains, IP host, a few suspicious words). Everything runs in your browser.</p>
+
+  <form id="form">
+    <input id="url" type="text" placeholder="https://example.com" autocomplete="off" spellcheck="false">
+    <button type="submit">Score</button>
+  </form>
+  <p id="status"></p>
+
+  <div>Examples:</div>
+  <div id="examples"></div>
+
+  <section id="result" hidden>
+    <div>Phishing probability: <span id="prob" class="big"></span></div>
+    <div>Verdict: <span id="verdict"></span></div>
+    <div>Top features (weight times standardized value):</div>
+    <table>
+      <tbody id="top"></tbody>
+    </table>
+  </section>
+
+  <p class="note">This is a learning project from a machine learning course, not a security product. It only looks at the URL text, so do not rely on it to decide whether a link is safe. Code and write-up: <a href="https://github.com/WasimSheikh/phishguard">github.com/WasimSheikh/phishguard</a>.</p>
+
+  <script src="phishguard.js"></script>
+</body>
+</html>

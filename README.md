@@ -1,10 +1,3 @@
----
-title: PhishGuard
-sdk: gradio
-sdk_version: 6.30.0
-app_file: app.py
----
-
 # PhishGuard
 
 A small phishing URL detector I built to practice logistic regression. It only looks at the text of the URL: length, digit count, special characters, subdomains, whether the host is an IP, and a short list of suspicious words. The scheme is stripped first so length and punctuation cannot still encode http vs https.
@@ -29,8 +22,9 @@ pytest -q
 
 ## Live demo
 
-Try it at https://huggingface.co/spaces/WasimSheikh/phishguard
-Locally: `python app.py` after `pip install -r requirements.txt`.
+https://huggingface.co/spaces/WasimSheikh/phishguard
+
+The demo is a static page in `demo/` that runs the same model in the browser (weights exported with `python scripts/export_weights.py`). `app.py` is a Gradio app for local use only: `python app.py` after `pip install -r requirements.txt`.
 
 ## Results
 
